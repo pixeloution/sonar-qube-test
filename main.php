@@ -9,9 +9,9 @@ $STH = $DBH->prepare("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE T
 $allowedList = $STH->fetchAll(PDO::FETCH_COLUMN);
 
 # not considered sanitized by itself, must still do sprintf
-#if ( ! in_array($myCol, $allowedList)) {
-#  throw new Exception("BAD");
-#}
+if ( ! in_array($myCol, $allowedList)) {
+  throw new Exception("BAD");
+}
 
 $SQL = sprintf("SELECT %s FROM myTbl", $myCol);
 
