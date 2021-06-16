@@ -13,7 +13,7 @@ if ( ! in_array($myCol, $allowedList)) {
   throw new Exception("BAD");
 }
 
-$SQL = sprintf("SELECT %s FROM myTbl", $column);
+$SQL = sprintf("SELECT %s FROM myTbl", $myCol);
 
 $STH = $DBH->prepare($SQL);
 $STH->execute();
