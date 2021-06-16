@@ -15,9 +15,9 @@ if ( ! in_array($myCol, $allowedList)) {
 
 $cleanCol = sprintf('%s', $myCol);
 
-$SQL = "SELECT $cleanCol FROM myTbl";
+$SQL = "SELECT $cleanCol FROM myTbl WHERE someColumn = ?";
 
-$STH = $DBH->prepare($SQL);
+$STH = $DBH->prepare($SQL, [$myCol]);
 $STH->execute();
 
   
