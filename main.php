@@ -5,11 +5,21 @@ $DBH->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $myCol = $_GET['myCol'];
 
-$STH = $DBH->prepare("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='myDB' AND TABLE_NAME='myTbl'");
-$allowedList = $STH->fetchAll(PDO::FETCH_COLUMN);
+function isValidColumn($col) {
+        $STH = $DBH->prepare("SELECT COUNT(column_name) AS n
+                FROM information_schema.columns
+                WHERE
+                    table_schema = '3862_amrjst'
+                    AND column_name = ?");
+        $STH->execute([$col]);
+        $result = $STH->fetch(); 
+
+        return (bool) $result['n'];
+}
+
 
 # not considered sanitized by itself, must still do sprintf
-if ( ! in_array($myCol, $allowedList)) {
+if ( ! isValidColumn($col)) {
   throw new Exception("BAD");
 }
 
