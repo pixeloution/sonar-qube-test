@@ -13,7 +13,9 @@ if ( ! in_array($myCol, $allowedList)) {
   throw new Exception("BAD");
 }
 
-$SQL = sprintf("SELECT %s FROM myTbl", $myCol);
+$cleanCol = sprintf('%s', $myCol);
+
+$SQL = "SELECT $cleanCol FROM myTbl";
 
 $STH = $DBH->prepare($SQL);
 $STH->execute();
