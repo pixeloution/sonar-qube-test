@@ -7,12 +7,12 @@ $myCol = $_GET['myCol'];
 $allowedList = ['a','b'];
 
 # not considered sanitized
-# if (in_array($myCol, $allowedList)) {
-#  $column = $myCol;
-# }
+if (in_array($myCol, $allowedList)) {
+  $column = $myCol;
+}
 
 # also not considered untainted, and very obviously wrong
-$column = $allowedList[array_search($myCol, $allowedList)];
+# $column = $allowedList[array_search($myCol, $allowedList)];
 
 
 $SQL = sprintf("SELECT %s FROM myTbl", $column);
