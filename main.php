@@ -25,7 +25,7 @@ if ( ! isValidColumn($col)) {
 
 $cleanCol = sprintf('%s', $myCol);
 
-$SQL = "SELECT $cleanCol FROM myTbl WHERE someColumn = ?";
+$SQL = sprintf("SELECT %s FROM myTbl WHERE someColumn = ?", $myCol);
 
 $STH = $DBH->prepare($SQL, [$myCol]);
 $STH->execute();
