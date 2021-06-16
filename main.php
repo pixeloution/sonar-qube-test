@@ -6,15 +6,15 @@ $DBH->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $myCol = $_GET['myCol'];
 
 function isValidColumn($col) {
-        $STH = $DBH->prepare("SELECT COUNT(column_name) AS n
+        $STH = $DBH->prepare("SELECT column_name
                 FROM information_schema.columns
                 WHERE
                     table_schema = '3862_amrjst'
                     AND column_name = ?");
         $STH->execute([$col]);
-        $result = $STH->fetch(); 
+        $results = $STH->fetchAll(PDO::FETCH_COL); 
 
-        return (bool) $result['n'];
+        return in_array($col, $results);
 }
 
 
