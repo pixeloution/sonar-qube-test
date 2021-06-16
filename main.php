@@ -11,10 +11,13 @@ $allowedList = ['a','b'];
 #  $column = $myCol;
 # }
 
-$column = $allowedList[array_search($myCol, $allowedList)];
+# also not considered untainted, and very obviously wrong
+# $column = $allowedList[array_search($myCol, $allowedList)];
 
 
-$STH = $DBH->prepare("SELECT $column FROM myTbl WHERE id = 55");
+$SQL = sprintf("SELECT %s FROM myTbl", $_GET['myCol']);
+
+$STH = $DBH->prepare($SQL);
 $STH->execute();
 
   
