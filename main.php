@@ -12,10 +12,10 @@ $allowedList = ['a','b'];
 # }
 
 # also not considered untainted, and very obviously wrong
-# $column = $allowedList[array_search($myCol, $allowedList)];
+$column = $allowedList[array_search($myCol, $allowedList)];
 
 
-$SQL = sprintf("SELECT %s FROM myTbl", $_GET['myCol']);
+$SQL = sprintf("SELECT %s FROM myTbl", $column);
 
 $STH = $DBH->prepare($SQL);
 $STH->execute();
